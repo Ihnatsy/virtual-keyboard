@@ -69,6 +69,7 @@ class Keyboard {
     }
 
     drawButtons() {
+        this.keyboardArea.querySelectorAll('li').forEach(item => item.remove())
         buttonsWhichCodes.forEach((whichCode, index) => {
             let buttonValue = ''
             buttonValue = this.setButtonValue(buttonValue, index, this.isEng, this.isShift, this.isCapslock)
@@ -132,32 +133,110 @@ class Keyboard {
             }
             this.keyboardArea.innerHTML += `<li class="${buttonClass}" data-code="${buttonsCodes[index]}">${buttonValue}</li>`
         })
+
+        if (this.isShift) {
+            if (event.code === 'ShiftLeft') {
+                document.querySelector('li[data-code="ShiftLeft"]').classList.add('active')
+            } else if (event.code === 'ShiftRight') {
+                document.querySelector('li[data-code="ShiftRight"]').classList.add('active')
+            }
+        }
     }
 
     setButtonValue(buttonValue, index, isEng, isShift, isCapslock) {
         if (isEng) {
             buttonValue = buttonsEngValues[index]
         }
-        if (!isEng) {
-            buttonValue = buttonsRusValues[index]
-        }
         if (isEng && isCapslock) {
             buttonValue = buttonsEngValuesCapslock[index]
+        }
+        if (isEng && isShift) {
+            buttonValue = buttonsEngValuesCapslock[index]
+        }
+        if (isEng && isCapslock && isShift) {
+            buttonValue = buttonsEngValues[index]
+        }
+        if (!isEng) {
+            buttonValue = buttonsRusValues[index]
         }
         if (!isEng && isCapslock) {
             buttonValue = buttonsRusValuesCapslock[index]
         }
+        if (!isEng && isShift) {
+            buttonValue = buttonsRusValuesCapslock[index]
+        }
+        if (!isEng && isCapslock && isShift) {
+            buttonValue = buttonsRusValues[index]
+        }
+
         return buttonValue
     }
 
     buttonDown(event) {
         event.preventDefault()
-        document.querySelector('li[data-code="' + event.code + '"]').classList.add('active')
+        if (!document.querySelector('li[data-code="' + event.code + '"]')) {
+            return
+        } else {
+            document.querySelector('li[data-code="' + event.code + '"]').classList.add('active')
+        }
+
+        let text = ''
+        let index = buttonsCodes.indexOf(event.code)
+        text = this.setButtonValue(text, index, this.isEng, this.isShift, this.isCapslock)
+        if (event.key !== 'Tab'
+            && event.key !== 'CapsLock'
+            && event.key !== 'Shift'
+            && event.key !== 'Control'
+            && event.key !== 'Meta'
+            && event.key !== 'Alt'
+            && event.key !== 'Backspace'
+            && event.key !== 'Delete'
+            && event.key !== 'Enter'
+            && event.code !== 'Space') {
+            this.textArea.innerHTML += text
+        }
+        if (event.key === 'Tab') {
+            this.textArea.innerHTML += '    '
+        }
+        if (event.code === 'Space') {
+            this.textArea.innerHTML += ' '
+        }
+        if (event.key === 'Enter') {
+            this.textArea.innerHTML += '\n'
+        }
+        if (event.key === 'Backspace') {
+            this.textArea.innerHTML = this.textArea.innerHTML.slice(0, -1)
+        }
+        if (event.key === 'Delete') {
+            this.textArea.innerHTML = this.textArea.innerHTML.slice(0, 1)
+        }
+
+        if (event.key === 'Shift') {
+            this.isShift = true
+            this.drawButtons()
+        }
+
     }
 
     buttonUp(event) {
         event.preventDefault()
         document.querySelector('li[data-code="' + event.code + '"]').classList.remove('active')
+
+        if (event.key === 'Shift') {
+            this.isShift = false
+            this.drawButtons()
+        }
+
+        if (event.key === 'CapsLock') {
+            this.isCapslock = !this.isCapslock
+            this.drawButtons()
+        }
+
+        if ((event.code === 'ControlLeft' && event.altKey) || (event.ctrlKey && event.code === 'AltLeft') ) {
+            this.isEng = !this.isEng
+            localStorage.setItem('isEng', this.isEng)
+            this.drawButtons()
+        }
     }
 
     eventListener() {
