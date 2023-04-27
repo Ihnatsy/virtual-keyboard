@@ -62,3 +62,7 @@
 .space {
   width: 370px;
 }
+
+.active {
+  background-color: darkslategrey;
+}

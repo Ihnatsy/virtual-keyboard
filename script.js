@@ -130,7 +130,7 @@ class Keyboard {
                 buttonClass += 'space '
                 buttonClass += 'special'
             }
-            this.keyboardArea.innerHTML +=`<li class="${buttonClass}">${buttonValue}</li>`
+            this.keyboardArea.innerHTML += `<li class="${buttonClass}" data-code="${buttonsCodes[index]}">${buttonValue}</li>`
         })
     }
 
@@ -150,12 +150,31 @@ class Keyboard {
         return buttonValue
     }
 
+    buttonDown(event) {
+        event.preventDefault()
+        document.querySelector('li[data-code="' + event.code + '"]').classList.add('active')
+    }
+
+    buttonUp(event) {
+        event.preventDefault()
+        document.querySelector('li[data-code="' + event.code + '"]').classList.remove('active')
+    }
+
+    eventListener() {
+        document.addEventListener('keydown', (event) => this.buttonDown(event))
+        document.addEventListener('keyup', (event) => this.buttonUp(event))
+
+    }
+
+
 }
 
 window.addEventListener('load', () => {
     const keyboard = new Keyboard()
     keyboard.createKeyboardElements()
     keyboard.drawButtons()
+    keyboard.eventListener()
+
 })
 
 
