@@ -4,3 +4,17 @@
   box-sizing: border-box;
 }
 
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textarea {
+  width: 1280px;
+  min-height: 140px;
+  margin-top: 50px;
+  background-color: lightgrey;
+  border: 2px solid black;
+}
