@@ -18,3 +18,8 @@
   background-color: lightgrey;
   border: 2px solid black;
 }
+
+.information {
+  margin-top: 20px;
+  font-size: 25px;
+}

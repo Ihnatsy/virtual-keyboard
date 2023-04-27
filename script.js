@@ -47,21 +47,52 @@ class Keyboard {
         this.isEng = JSON.parse(localStorage.getItem('isEng'))
         this.isShift = false
         this.isCapslock = false
+
+        this.buttonValue
     }
 
-    createKeyboard() {
+    createKeyboardElements() {
         const body = document.querySelector('body')
         body.classList.add('body')
 
         this.textArea = document.createElement('textarea')
         this.textArea.classList.add('textarea')
         body.appendChild(this.textArea)
+
+        // this.keyboardArea = document.createElement('ul')
+        // this.keyboardArea.classList.add('keyboard')
+        // body.appendChild(this.keyboardArea)
+
+        this.information = document.createElement('p')
+        this.information.classList.add('information')
+        this.information.innerText = 'Клавиатура создана в операционной системе Windows.\nДля переключения языка используйте левые Ctrl + Alt'
+        body.appendChild(this.information)
+    }
+
+    setButtonValue(buttonValue, index, isEng, isShift, isCapslock) {
+        if (isEng) {
+            buttonValue = buttonsEngValues[index]
+        }
+        if (!isEng) {
+            buttonValue = buttonsRusValues[index]
+        }
+        if (isEng && isCapslock) {
+            buttonValue = buttonsEngValuesCapslock[index]
+        }
+        if (!isEng && isCapslock) {
+            buttonValue = buttonsRusValuesCapslock[index]
+        }
+        return buttonValue
+    }
+
+    drawButtons() {
+
     }
 }
 
 window.addEventListener('load', () => {
     const keyboard = new Keyboard()
-    keyboard.createKeyboard()
+    keyboard.createKeyboardElements()
 })
 
 
