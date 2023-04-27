@@ -12,9 +12,10 @@
 }
 
 .textarea {
-  width: 1280px;
+  width: 1000px;
   min-height: 140px;
   margin-top: 50px;
+  margin-bottom: 50px;
   background-color: lightgrey;
   border: 2px solid black;
 }
@@ -22,4 +23,42 @@
 .information {
   margin-top: 20px;
   font-size: 25px;
+}
+
+.keyboard {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: seagreen;
+  width: 1000px;
+}
+
+.button-item {
+  list-style: none;
+  margin: 6px;
+  padding: 14px 20px;
+  background-color: limegreen;
+  font-size: 20px;
+  color: white;
+  font-weight: 400;
+}
+
+.special {
+  background-color: darkgreen;
+}
+
+.enter {
+  width: 125px;
+}
+
+.shift {
+  width: 135px;
+}
+
+.arrow {
+  width: 55px;
+}
+
+.space {
+  width: 370px;
 }

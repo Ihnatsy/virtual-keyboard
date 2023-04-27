@@ -48,7 +48,6 @@ class Keyboard {
         this.isShift = false
         this.isCapslock = false
 
-        this.buttonValue
     }
 
     createKeyboardElements() {
@@ -59,14 +58,80 @@ class Keyboard {
         this.textArea.classList.add('textarea')
         body.appendChild(this.textArea)
 
-        // this.keyboardArea = document.createElement('ul')
-        // this.keyboardArea.classList.add('keyboard')
-        // body.appendChild(this.keyboardArea)
+        this.keyboardArea = document.createElement('ul')
+        this.keyboardArea.classList.add('keyboard')
+        body.appendChild(this.keyboardArea)
 
         this.information = document.createElement('p')
         this.information.classList.add('information')
         this.information.innerText = 'Клавиатура создана в операционной системе Windows.\nДля переключения языка используйте левые Ctrl + Alt'
         body.appendChild(this.information)
+    }
+
+    drawButtons() {
+        buttonsWhichCodes.forEach((whichCode, index) => {
+            let buttonValue = ''
+            buttonValue = this.setButtonValue(buttonValue, index, this.isEng, this.isShift, this.isCapslock)
+            let buttonClass = 'button-item '
+            if (whichCode === 8) {
+                buttonClass += 'backspace '
+                buttonClass += 'special'
+            }
+            if (whichCode === 9) {
+                buttonClass += 'tab '
+                buttonClass += 'special'
+            }
+            if (whichCode === 46) {
+                buttonClass += 'delete '
+                buttonClass += 'special'
+            }
+            if (whichCode === 20) {
+                buttonClass += 'capslock '
+                buttonClass += 'special'
+            }
+            if (whichCode === 13) {
+                buttonClass += 'enter '
+                buttonClass += 'special'
+            }
+            if (whichCode === 16) {
+                buttonClass += 'shift '
+                buttonClass += 'special'
+            }
+            if (whichCode === 38) {
+                buttonClass += 'arrow '
+                buttonClass += 'special'
+            }
+            if (whichCode === 17) {
+                buttonValue = 'Ctrl'
+                buttonClass += 'control '
+                buttonClass += 'special'
+            }
+            if (whichCode === 91) {
+                buttonClass += 'win '
+                buttonClass += 'special'
+            }
+            if (whichCode === 18) {
+                buttonClass += 'alt '
+                buttonClass += 'special'
+            }
+            if (whichCode === 37) {
+                buttonClass += 'arrow '
+                buttonClass += 'special'
+            }
+            if (whichCode === 40) {
+                buttonClass += 'arrow '
+                buttonClass += 'special'
+            }
+            if (whichCode === 39) {
+                buttonClass += 'arrow '
+                buttonClass += 'special'
+            }
+            if (whichCode === 32) {
+                buttonClass += 'space '
+                buttonClass += 'special'
+            }
+            this.keyboardArea.innerHTML +=`<li class="${buttonClass}">${buttonValue}</li>`
+        })
     }
 
     setButtonValue(buttonValue, index, isEng, isShift, isCapslock) {
@@ -85,14 +150,12 @@ class Keyboard {
         return buttonValue
     }
 
-    drawButtons() {
-
-    }
 }
 
 window.addEventListener('load', () => {
     const keyboard = new Keyboard()
     keyboard.createKeyboardElements()
+    keyboard.drawButtons()
 })
 
 
