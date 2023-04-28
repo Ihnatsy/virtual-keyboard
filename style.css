@@ -32,6 +32,9 @@
   background-color: seagreen;
   width: 1050px;
   border-radius: 10px;
+  height: max-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .button-item {
@@ -45,6 +48,8 @@
   border-radius: 10px;
   width: 53px;
   height: 53px;
+  box-shadow: 3px 8px 0 darkslategrey;
+  transition:0.15s;
 }
 
 .special {
@@ -97,4 +102,6 @@
 .active {
   background-color: blueviolet;
   border-radius: 10px;
+  transform:translateY(5px);
+  box-shadow: 0 2px 0 darkslategrey;
 }
