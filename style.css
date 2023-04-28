@@ -31,6 +31,7 @@
   flex-wrap: wrap;
   background-color: seagreen;
   width: 1050px;
+  border-radius: 10px;
 }
 
 .button-item {
@@ -42,6 +43,8 @@
   color: white;
   font-weight: 400;
   border-radius: 10px;
+  width: 53px;
+  height: 53px;
 }
 
 .special {
@@ -52,6 +55,18 @@
   width: 156px;
 }
 
+.tab {
+  width: 70px;
+}
+
+.delete {
+  width: 92px;
+}
+
+.capslock {
+  width: 130px;
+}
+
 .enter {
   width: 125px;
 }
@@ -60,15 +75,26 @@
   width: 135px;
 }
 
+.control {
+  width: 72px;
+}
+
+.win {
+  width: 75px;
+}
+
+.alt {
+  width: 67px;
+}
 .arrow {
   width: 55px;
 }
 
 .space {
-  width: 423px;
+  width: 424px;
 }
 
 .active {
-  background-color: darkslategrey;
+  background-color: blueviolet;
   border-radius: 10px;
 }

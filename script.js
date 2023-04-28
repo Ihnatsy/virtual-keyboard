@@ -141,6 +141,14 @@ class Keyboard {
                 document.querySelector('li[data-code="ShiftRight"]').classList.add('active')
             }
         }
+
+        if (this.isShift) {
+            if (event.target.getAttribute('data-code') === 'ShiftLeft') {
+                document.querySelector('li[data-code="ShiftLeft"]').classList.add('active')
+            } else if (event.target.getAttribute('data-code') === 'ShiftRight') {
+                document.querySelector('li[data-code="ShiftRight"]').classList.add('active')
+            }
+        }
     }
 
     setButtonValue(buttonValue, index, isEng, isShift, isCapslock) {
@@ -232,9 +240,81 @@ class Keyboard {
             this.drawButtons()
         }
 
-        if ((event.code === 'ControlLeft' && event.altKey) || (event.ctrlKey && event.code === 'AltLeft') ) {
+        if ((event.code === 'ControlLeft' && event.altKey) || (event.ctrlKey && event.code === 'AltLeft')) {
             this.isEng = !this.isEng
             localStorage.setItem('isEng', this.isEng)
+            this.drawButtons()
+        }
+    }
+
+    mouseDown(event) {
+        if (event.target.tagName !== 'LI') {
+            return
+        } else {
+            let button = event.target
+            button.classList.add('active')
+            let buttonDataCode = button.getAttribute('data-code')
+
+            if (buttonDataCode !== 'Tab'
+                && buttonDataCode !== 'CapsLock'
+                && buttonDataCode !== 'ShiftLeft'
+                && buttonDataCode !== 'ShiftRight'
+                && buttonDataCode !== 'ControlLeft'
+                && buttonDataCode !== 'ControlRight'
+                && buttonDataCode !== 'MetaLeft'
+                && buttonDataCode !== 'AltLeft'
+                && buttonDataCode !== 'AltRight'
+                && buttonDataCode !== 'Backspace'
+                && buttonDataCode !== 'Delete'
+                && buttonDataCode !== 'Enter'
+                && buttonDataCode !== 'Space') {
+                this.textArea.innerHTML += button.innerText
+            }
+            if (buttonDataCode === 'Tab') {
+                this.textArea.innerHTML += '    '
+            }
+            if (buttonDataCode === 'Space') {
+                this.textArea.innerHTML += ' '
+            }
+            if (buttonDataCode === 'Enter') {
+                this.textArea.innerHTML += '\n'
+            }
+            if (buttonDataCode === 'Backspace') {
+                this.textArea.innerHTML = this.textArea.innerHTML.slice(0, -1)
+            }
+            if (buttonDataCode === 'Delete') {
+                this.textArea.innerHTML = this.textArea.innerHTML.slice(0, 1)
+            }
+            if (buttonDataCode === 'ShiftLeft') {
+                this.isShift = !this.isShift
+                this.drawButtons()
+            }
+            if (buttonDataCode === 'ShiftRight') {
+                this.isShift = !this.isShift
+                this.drawButtons()
+            }
+
+        }
+
+
+    }
+
+    mouseUp() {
+        let button = event.target
+        button.classList.remove('active')
+        let buttonDataCode = button.getAttribute('data-code')
+
+        if (buttonDataCode === 'ShiftLeft') {
+            this.isShift = !this.isShift
+            this.drawButtons()
+        }
+        if (buttonDataCode === 'ShiftRight') {
+            this.isShift = !this.isShift
+            this.drawButtons()
+        }
+
+        if (buttonDataCode === 'CapsLock') {
+            this.isCapslock = !this.isCapslock
             this.drawButtons()
         }
     }
@@ -242,6 +322,8 @@ class Keyboard {
     eventListener() {
         document.addEventListener('keydown', (event) => this.buttonDown(event))
         document.addEventListener('keyup', (event) => this.buttonUp(event))
+        document.addEventListener('mousedown', (event) => this.mouseDown(event))
+        document.addEventListener('mouseup', (event) => this.mouseUp(event))
 
     }
 
