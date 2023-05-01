@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textarea {
+  width: 1050px;
+  min-height: 140px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: lightgrey;
+  border: 2px solid black;
+}
+
+.information {
+  margin-top: 20px;
+  font-size: 25px;
+}
+
+.keyboard {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: seagreen;
+  width: 1050px;
+  border-radius: 10px;
+  height: max-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.button-item {
+  list-style: none;
+  margin: 6px;
+  padding: 14px 20px;
+  background-color: limegreen;
+  font-size: 20px;
+  color: white;
+  font-weight: 400;
+  border-radius: 10px;
+  width: 53px;
+  height: 53px;
+  box-shadow: 3px 8px 0 darkslategrey;
+  transition:0.15s;
+}
+
+.special {
+  background-color: darkgreen;
+}
+
+.backspace {
+  width: 156px;
+}
+
+.tab {
+  width: 70px;
+}
+
+.delete {
+  width: 92px;
+}
+
+.capslock {
+  width: 130px;
+}
+
+.enter {
+  width: 125px;
+}
+
+.shift {
+  width: 135px;
+}
+
+.control {
+  width: 72px;
+}
+
+.win {
+  width: 75px;
+}
+
+.alt {
+  width: 67px;
+}
+.arrow {
+  width: 55px;
+}
+
+.space {
+  width: 424px;
+}
+
+.active {
+  background-color: blueviolet;
+  border-radius: 10px;
+  transform:translateY(5px);
+  box-shadow: 0 2px 0 darkslategrey;
+}
